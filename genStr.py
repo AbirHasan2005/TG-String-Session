@@ -36,20 +36,20 @@ async def genStr(_, msg: Message):
     try:
         check_api = int(api.text)
     except Exception:
-        await api.delete()
+        #await api.delete()
         await msg.reply("`API_ID` is Invalid.\nPress /start to Start again.")
         return
     api_id = api.text
-    await api.delete()
+    #await api.delete()
     hash = await bot.ask(chat.id, HASH_TEXT)
     if await is_cancel(msg, hash.text):
         return
     if not len(hash.text) >= 30:
-        await hash.delete()
+        #await hash.delete()
         await msg.reply("`API_HASH` is Invalid.\nPress /start to Start again.")
         return
     api_hash = hash.text
-    await hash.delete()
+    #await hash.delete()
     while True:
         number = await bot.ask(chat.id, PHONE_NUMBER_TEXT)
         if not number.text:
@@ -57,12 +57,12 @@ async def genStr(_, msg: Message):
         if await is_cancel(msg, number.text):
             return
         phone = number.text
-        await number.delete()
+        #await number.delete()
         confirm = await bot.ask(chat.id, f'`Is "{phone}" correct? (y/n):` \n\nSend: `y` (If Yes)\nSend: `n` (If No)')
         if await is_cancel(msg, confirm.text):
             return
         if "y" in confirm.text:
-            await confirm.delete()
+            #await confirm.delete()
             break
     try:
         client = Client("my_account", api_id=api_id, api_hash=api_hash)
@@ -92,7 +92,7 @@ async def genStr(_, msg: Message):
                       "Please enter OTP in `1 2 3 4 5` format __(With Space between all numbers)__.\n\n"
                       "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
                       "Press /cancel to Cancel."), timeout=300)
-        reply_markup = InlineKeyboardMarkup(
+        InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="Restart Bot", url=f"tg://openmessage?user_id={chat.id}")]]
         )
     except TimeoutError:
@@ -101,7 +101,7 @@ async def genStr(_, msg: Message):
     if await is_cancel(msg, otp.text):
         return
     otp_code = otp.text
-    await otp.delete()
+    #await otp.delete()
     try:
         await client.sign_in(phone, code.phone_code_hash, phone_code=' '.join(str(otp_code)))
     except PhoneCodeInvalid:
@@ -123,7 +123,7 @@ async def genStr(_, msg: Message):
         if await is_cancel(msg, two_step_code.text):
             return
         new_code = two_step_code.text
-        await two_step_code.delete()
+        #await two_step_code.delete()
         try:
             await client.check_password(new_code)
         except Exception as e:
@@ -148,7 +148,7 @@ async def genStr(_, msg: Message):
 
 @bot.on_message(filters.private & filters.command("restart"))
 async def restart(_, msg: Message):
-    await msg.reply("`Restarting ...`")
+    await msg.reply("Restarted")
     HU_APP.restart()
 
 
@@ -162,8 +162,7 @@ It needs `API_ID`, `API_HASH`, Phone Number and One Time Verification Code. \
 Which will be sent to your Phone Number.
 You have to put **OTP** in `1 2 3 4 5` this format __(With Space between all numbers)__.
 
-**NOTE:** If bot not Sending OTP to your Phone Number than send 
-/restart Command and again send /start to Start your Process.
+**NOTE:** If bot not Sending OTP to your Phone Number than send /restart Command and again send /start to Start your Process.
 
 Developer: [@AbirHasan2005](http://t.me/linux_repo) \
 By [Discovery Projects](http://t.me/DIscovery_Updates)
