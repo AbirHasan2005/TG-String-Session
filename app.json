@@ -1,0 +1,54 @@
+{
+  "name": "TG-String-Session",
+  "description": "A bot for Generating String Session of Telegram Account mostly for Userbots.",
+  "keywords": [
+    "telegram",
+    "best",
+    "string",
+    "session",
+    'generator",
+    "open",
+    "source"
+  ],
+  "success_url": "https://t.me/linux_repo",
+  "website": "https://t.me/Discovery_Updates,
+  "repository": "https://github.com/AbirHasan2005/TG-String-Session/tree/main",
+  "env": {
+    "APP_NAME": {
+      "description": "Heroku App Name",
+      "value": "",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Your bot token, as a string.",
+      "value": "",
+      "required": true
+    },
+    "API_KEY": {
+      "description": "Your Heroku Account API Key from: https://dashboard.heroku.com/account",
+      "value": "",
+      "required": true
+    },
+    "API_ID": {
+      "description": "Get from: my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get from: my.telegram.org",
+      "value": "",
+      "required": true
+    }
+  },
+  "addons": [
+  ],
+  "buildpacks": [{
+    "url": "heroku/python"
+  }],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
