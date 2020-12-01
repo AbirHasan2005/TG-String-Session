@@ -17,8 +17,8 @@ This is Pyrogram's String Session Generator Bot. I will generate String Session 
 
 By @Discovery_Updates
 
-For Help send /help """
-HASH_TEXT = "`Now send your `API_HASH`.`\n\nPress /cancel to Cancel Task."
+Now send your `API_ID` same as `APP_ID` to Start Generating Session."""
+HASH_TEXT = "Now send your `API_HASH`.\n\nPress /cancel to Cancel Task."
 PHONE_NUMBER_TEXT = (
     "Now send your Telegram account's Phone number in International Format. \n"
     "Including Country code. Example: **+14154566376**\n\n"
@@ -89,12 +89,10 @@ async def genStr(_, msg: Message):
     try:
         otp = await bot.ask(
             chat.id, ("`An OTP is sent to your phone number, "
-                      "Please enter OTP in `1 2 3 4 5` format __(With Space between all numbers)__.\n\n"
+                      "Please enter OTP in `1 2 3 4 5` format. __(Space between each numbers!)__ \n\n"
                       "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
                       "Press /cancel to Cancel."), timeout=300)
-        InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="Restart Bot", url=f"tg://openmessage?user_id={chat.id}")]]
-        )
+
     except TimeoutError:
         await msg.reply("Time limit reached of 5 min.\nPress /start to Start again.")
         return
@@ -134,7 +132,7 @@ async def genStr(_, msg: Message):
         return
     try:
         session_string = await client.export_session_string()
-        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy @StringSessionGen_Bot \nA Bot By @Discovery_Updates")
+        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy [@StringSessionGen_Bot[(tg://openmessage?user_id=715779594) \nA Bot By @Discovery_Updates")
         await client.disconnect()
         text = "String Session is Successfully Generated.\nClick on Below Button."
         reply_markup = InlineKeyboardMarkup(
@@ -148,7 +146,7 @@ async def genStr(_, msg: Message):
 
 @bot.on_message(filters.private & filters.command("restart"))
 async def restart(_, msg: Message):
-    await msg.reply("Restarted")
+    await msg.reply("Restarted Bot!")
     HU_APP.restart()
 
 
@@ -160,20 +158,29 @@ which gives you `STRING_SESSION` for your UserBot.
 
 It needs `API_ID`, `API_HASH`, Phone Number and One Time Verification Code. \
 Which will be sent to your Phone Number.
-You have to put **OTP** in `1 2 3 4 5` this format __(With Space between all numbers)__.
+You have to put **OTP** in `1 2 3 4 5` this format. __(Space between each numbers!)__
 
-**NOTE:** If bot not Sending OTP to your Phone Number than send /restart Command and again send /start to Start your Process.
+**NOTE:** If bot not Sending OTP to your Phone Number than send /restart Command and again send /start to Start your Process. 
 
-Developer: [@AbirHasan2005](http://t.me/linux_repo) \
-By [Discovery Projects](http://t.me/DIscovery_Updates)
-Must Join Channel for Updates !!
+Must Join Channel for Bot Updates !!
 """
-    await msg.reply(out, disable_web_page_preview=True)
+    reply_markup = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton('Support Group', url='https://t.me/linux_repo'),
+                InlineKeyboardButton('Developer', url='https://t.me/AbirHasan2005')
+            ],
+            [
+                InlineKeyboardButton('Bots Updates Channel', url='https://t.me/Discovery_Updates'),
+            ]
+        ]
+    )
+    await msg.reply(out, reply_markup=reply_markup)
 
 
 async def is_cancel(msg: Message, text: str):
     if text.startswith("/cancel"):
-        await msg.reply("`Process Cancelled.`")
+        await msg.reply("Process Cancelled.")
         return True
     return False
 
