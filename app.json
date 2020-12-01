@@ -10,6 +10,15 @@
     "open",
     "source"
   ],
+      "buildpacks": [{
+    "url": "heroku/python"
+  }],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
   "success_url": "https://t.me/linux_repo",
   "website": "https://t.me/Discovery_Updates,
   "repository": "https://github.com/AbirHasan2005/TG-String-Session.git",
@@ -38,15 +47,6 @@
       "description": "Get from: my.telegram.org",
       "value": "",
       "required": true
+        }
     }
-  },
-  "buildpacks": [{
-    "url": "heroku/python"
-  }],
-  "formation": {
-    "worker": {
-      "quantity": 1,
-      "size": "free"
-    }
-  }
 }
