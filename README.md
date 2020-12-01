@@ -11,7 +11,7 @@ Genrate String Session Using this bot.
 - APP_NAME
   - Heroku App Name.
 - BOT_TOKEN
-  - Telegram Bot Token from [here}(https://t.me/BotFather).
+  - Telegram Bot Token from [here](https://t.me/BotFather).
 
 ## Deploy Now:
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/AbirHasan2005/TG-String-Session/tree/main)
