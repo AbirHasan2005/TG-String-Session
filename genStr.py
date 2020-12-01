@@ -12,15 +12,17 @@ from pyrogram.errors import (
     PhoneCodeInvalid, PhoneCodeExpired
 )
 
-API_TEXT = """Hi {}
-Welcome to Pyrogram's `HU_STRING_SESSION` generator Bot.
+API_TEXT = """Hi, {}.
+This is Pyrogram's String Session Generator Bot. I will generate String Session of your Telegram Account.
 
-`Send your API_ID to Continue.`"""
-HASH_TEXT = "`Send your API_HASH to Continue.`\n\nPress /cancel to Cancel."
+By @Discovery_Updates
+
+`Send your `API_ID` same as `APP_ID`.`"""
+HASH_TEXT = "`Now send your `API_HASH`.`\n\nPress /cancel to Cancel Task."
 PHONE_NUMBER_TEXT = (
-    "`Now send your Phone number to Continue"
-    "` include Country code. eg. +13124562345`\n\n"
-    "Press /cancel to Cancel."
+    "Now send your Telegram account's Phone number in International Format. \n"
+    "Including Country code. Example: **+14154566376**\n\n"
+    "Press /cancel to Cancel Task."
 )
 
 @bot.on_message(filters.private & filters.command("start"))
@@ -35,7 +37,7 @@ async def genStr(_, msg: Message):
         check_api = int(api.text)
     except Exception:
         await api.delete()
-        await msg.reply("`API ID Invalid.`\nPress /start to create again.")
+        await msg.reply("`API_ID` is Invalid.\nPress /start to Start again.")
         return
     api_id = api.text
     await api.delete()
@@ -44,7 +46,7 @@ async def genStr(_, msg: Message):
         return
     if not len(hash.text) >= 30:
         await hash.delete()
-        await msg.reply("`API HASH Invalid.`\nPress /start to create again.")
+        await msg.reply("`API_HASH` is Invalid.\nPress /start to Start again.")
         return
     api_hash = hash.text
     await hash.delete()
@@ -56,7 +58,7 @@ async def genStr(_, msg: Message):
             return
         phone = number.text
         await number.delete()
-        confirm = await bot.ask(chat.id, f'`Is "{phone}" correct? (y/n):` \n\ntype: `y` (If Yes)\ntype: `n` (If No)')
+        confirm = await bot.ask(chat.id, f'`Is "{phone}" correct? (y/n):` \n\nSend: `y` (If Yes)\nSend: `n` (If No)')
         if await is_cancel(msg, confirm.text):
             return
         if "y" in confirm.text:
@@ -76,7 +78,7 @@ async def genStr(_, msg: Message):
         code = await client.send_code(phone)
         await asyncio.sleep(1)
     except FloodWait as e:
-        await msg.reply(f"`you have floodwait of {e.x} Seconds`")
+        await msg.reply(f"`Yu have floodwait of {e.x} Seconds`")
         return
     except ApiIdInvalid:
         await msg.reply("`Api Id and Api Hash are Invalid.`\n\nPress /start to create again.")
