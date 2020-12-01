@@ -6,13 +6,13 @@
     "best",
     "string",
     "session",
-    'generator",
+    "generator",
     "open",
     "source"
   ],
   "success_url": "https://t.me/linux_repo",
   "website": "https://t.me/Discovery_Updates,
-  "repository": "https://github.com/AbirHasan2005/TG-String-Session/tree/main",
+  "repository": "https://github.com/AbirHasan2005/TG-String-Session.git",
   "env": {
     "APP_NAME": {
       "description": "Heroku App Name",
