@@ -67,7 +67,7 @@ async def genStr(_, msg: Message):
     try:
         client = Client("my_account", api_id=api_id, api_hash=api_hash)
     except Exception as e:
-        await bot.send_message(chat.id ,f"**ERROR:** `{str(e)}`\nPress /start to create again.")
+        await bot.send_message(chat.id ,f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
         return
     try:
         await client.connect()
@@ -78,22 +78,22 @@ async def genStr(_, msg: Message):
         code = await client.send_code(phone)
         await asyncio.sleep(1)
     except FloodWait as e:
-        await msg.reply(f"`Yu have floodwait of {e.x} Seconds`")
+        await msg.reply(f"You have Floodwait of {e.x} Seconds")
         return
     except ApiIdInvalid:
-        await msg.reply("`Api Id and Api Hash are Invalid.`\n\nPress /start to create again.")
+        await msg.reply("API ID and API Hash are Invalid.\n\nPress /start to Start again.")
         return
     except PhoneNumberInvalid:
-        await msg.reply("`your Phone Number is Invalid.`\n\nPress /start to create again.")
+        await msg.reply("Your Phone Number is Invalid.\n\nPress /start to Start again.")
         return
     try:
         otp = await bot.ask(
-            chat.id, ("`An otp is sent to your phone number, "
-                      "Please enter otp in `1 2 3 4 5` format.`\n\n"
-                      "`If Bot not sending OTP then try` /restart `cmd and again` /start `the Bot.`\n"
+            chat.id, ("`An OTP is sent to your phone number, "
+                      "Please enter OTP in `1 2 3 4 5` format __(With Space between all numbers)__.\n\n"
+                      "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
                       "Press /cancel to Cancel."), timeout=300)
     except TimeoutError:
-        await msg.reply("`Time limit reached of 5 min.\nPress /start to create again.`")
+        await msg.reply("Time limit reached of 5 min.\nPress /start to Start again.")
         return
     if await is_cancel(msg, otp.text):
         return
@@ -102,16 +102,16 @@ async def genStr(_, msg: Message):
     try:
         await client.sign_in(phone, code.phone_code_hash, phone_code=' '.join(str(otp_code)))
     except PhoneCodeInvalid:
-        await msg.reply("`Invalid Code.`\n\nPress /start to create again.")
+        await msg.reply("Invalid Code.\n\nPress /start to Start again.")
         return
     except PhoneCodeExpired:
-        await msg.reply("`Code is Expired.`\n\nPress /start to create again.")
+        await msg.reply("Code is Expired.\n\nPress /start to Start again.")
         return
     except SessionPasswordNeeded:
         try:
             two_step_code = await bot.ask(
                 chat.id, 
-                "`This account have two-step verification code.\nPlease enter your second factor authentication code.`\nPress /cancel to Cancel.",
+                "Your account have Two-Step Verification.\nPlease enter your Password.\n\nPress /cancel to Cancel.",
                 timeout=300
             )
         except TimeoutError:
