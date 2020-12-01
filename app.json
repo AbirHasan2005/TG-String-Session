@@ -10,8 +10,8 @@
     "open",
     "source"
   ],
-      "buildpacks": [{
-    "url": "heroku/python"
+  "buildpacks": [{
+  "url": "heroku/python"
   }],
     "formation": {
         "worker": {
@@ -19,34 +19,34 @@
             "size": "free"
         }
     },
-  "success_url": "https://t.me/linux_repo",
-  "website": "https://t.me/Discovery_Updates,
-  "repository": "https://github.com/AbirHasan2005/TG-String-Session.git",
-  "env": {
-    "APP_NAME": {
-      "description": "Heroku App Name",
-      "value": "",
-      "required": true
-    },
-    "BOT_TOKEN": {
-      "description": "Your bot token, as a string.",
-      "value": "",
-      "required": true
-    },
-    "API_KEY": {
-      "description": "Your Heroku Account API Key from: https://dashboard.heroku.com/account",
-      "value": "",
-      "required": true
-    },
-    "API_ID": {
-      "description": "Get from: my.telegram.org",
-      "value": "",
-      "required": true
-    },
-    "API_HASH": {
-      "description": "Get from: my.telegram.org",
-      "value": "",
-      "required": true
-        }
-    }
+    "success_url": "https://t.me/linux_repo",
+    "website": "https://t.me/Discovery_Updates,
+    "repository": "https://github.com/AbirHasan2005/TG-String-Session.git",
+    "env": {
+      "APP_NAME": {
+        "description": "Heroku App Name",
+        "value": "",
+        "required": true
+      },
+      "BOT_TOKEN": {
+        "description": "Your bot token, as a string.",
+        "value": "",
+        "required": true
+      },
+      "API_KEY": {
+        "description": "Your Heroku Account API Key from: https://dashboard.heroku.com/account",
+        "value": "",
+        "required": true
+      },
+      "API_ID": {
+        "description": "Get from: my.telegram.org",
+        "value": "",
+        "required": true
+      },
+      "API_HASH": {
+        "description": "Get from: my.telegram.org",
+        "value": "",
+        "required": true
+      }
+   }
 }
