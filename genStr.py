@@ -88,7 +88,7 @@ async def genStr(_, msg: Message):
         return
     try:
         otp = await bot.ask(
-            chat.id, ("`An OTP is sent to your phone number, "
+            chat.id, ("An OTP is sent to your phone number, "
                       "Please enter OTP in `1 2 3 4 5` format. __(Space between each numbers!)__ \n\n"
                       "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
                       "Press /cancel to Cancel."), timeout=300)
@@ -132,11 +132,11 @@ async def genStr(_, msg: Message):
         return
     try:
         session_string = await client.export_session_string()
-        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy [@StringSessionGen_Bot[(tg://openmessage?user_id=715779594) \nA Bot By @Discovery_Updates")
+        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy [@StringSessionGen_Bot](tg://openmessage?user_id=1472531255) \nA Bot By @Discovery_Updates")
         await client.disconnect()
         text = "String Session is Successfully Generated.\nClick on Below Button."
         reply_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="Restart Bot", url=f"tg://openmessage?user_id={chat.id}")]]
+            [[InlineKeyboardButton(text="Show String Session", url=f"tg://openmessage?user_id={chat.id}")]]
         )
         await bot.send_message(chat.id, text, reply_markup=reply_markup)
     except Exception as e:
@@ -153,8 +153,8 @@ async def restart(_, msg: Message):
 @bot.on_message(filters.private & filters.command("help"))
 async def restart(_, msg: Message):
     out = f"""
-Hi, {msg.from_user.mention}. This is Pyrogram Session String Generator Bot \
-which gives you `STRING_SESSION` for your UserBot.
+Hi, {msg.from_user.mention}. This is Pyrogram Session String Generator Bot. \
+I will give you `STRING_SESSION` for your UserBot.
 
 It needs `API_ID`, `API_HASH`, Phone Number and One Time Verification Code. \
 Which will be sent to your Phone Number.
