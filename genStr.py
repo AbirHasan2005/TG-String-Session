@@ -17,7 +17,7 @@ This is Pyrogram's String Session Generator Bot. I will generate String Session 
 
 By @Discovery_Updates
 
-`Send your `API_ID` same as `APP_ID`.`"""
+For Help send /help """
 HASH_TEXT = "`Now send your `API_HASH`.`\n\nPress /cancel to Cancel Task."
 PHONE_NUMBER_TEXT = (
     "Now send your Telegram account's Phone number in International Format. \n"
@@ -92,6 +92,9 @@ async def genStr(_, msg: Message):
                       "Please enter OTP in `1 2 3 4 5` format __(With Space between all numbers)__.\n\n"
                       "If Bot not sending OTP then try /restart and Start Task again with /start command to Bot.\n"
                       "Press /cancel to Cancel."), timeout=300)
+        reply_markup = InlineKeyboardMarkup(
+            [[InlineKeyboardButton(text="Restart Bot", url=f"tg://openmessage?user_id={chat.id}")]]
+        )
     except TimeoutError:
         await msg.reply("Time limit reached of 5 min.\nPress /start to Start again.")
         return
@@ -115,7 +118,7 @@ async def genStr(_, msg: Message):
                 timeout=300
             )
         except TimeoutError:
-            await msg.reply("`Time limit reached of 5 min.\n\nPress /start to create again.`")
+            await msg.reply("`Time limit reached of 5 min.\n\nPress /start to Start again.`")
             return
         if await is_cancel(msg, two_step_code.text):
             return
@@ -131,11 +134,11 @@ async def genStr(_, msg: Message):
         return
     try:
         session_string = await client.export_session_string()
-        await client.send_message("me", f"#PYROGRAM #HU_STRING_SESSION\n\n```{session_string}```")
+        await client.send_message("me", f"#PYROGRAM #STRING_SESSION\n\n```{session_string}``` \n\nBy @StringSessionGen_Bot \nA Bot By @Discovery_Updates")
         await client.disconnect()
-        text = "`String Session is Successfully Generated.\nClick on Button Below.`"
+        text = "String Session is Successfully Generated.\nClick on Below Button."
         reply_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="Click Me", url=f"tg://openmessage?user_id={chat.id}")]]
+            [[InlineKeyboardButton(text="Restart Bot", url=f"tg://openmessage?user_id={chat.id}")]]
         )
         await bot.send_message(chat.id, text, reply_markup=reply_markup)
     except Exception as e:
@@ -145,26 +148,26 @@ async def genStr(_, msg: Message):
 
 @bot.on_message(filters.private & filters.command("restart"))
 async def restart(_, msg: Message):
-    await msg.reply("`Restarting`")
+    await msg.reply("`Restarting ...`")
     HU_APP.restart()
 
 
 @bot.on_message(filters.private & filters.command("help"))
 async def restart(_, msg: Message):
     out = f"""
-Hello {msg.from_user.mention}, this is Pyrogram Session String Generator Bot \
-which gives you `HU_STRING_SESSION` for your UserBot.
+Hi, {msg.from_user.mention}. This is Pyrogram Session String Generator Bot \
+which gives you `STRING_SESSION` for your UserBot.
 
-It needs `API_ID` , `API_HASH` , `PHONE_NUMBER` and `One time Verification Code` \
-which will send to your `PHONE_NUMBER`.
-you have to put `OTP` in `1 2 3 4 5` this format.
+It needs `API_ID`, `API_HASH`, Phone Number and One Time Verification Code. \
+Which will be sent to your Phone Number.
+You have to put **OTP** in `1 2 3 4 5` this format __(With Space between all numbers)__.
 
-**NOTE:** `If bot not Sending Otp to your PHONE_NUMBER then try` 
-/restart `Command and again` /start `your Process.`
+**NOTE:** If bot not Sending OTP to your Phone Number than send 
+/restart Command and again send /start to Start your Process.
 
-(C) Author: [Krishna Singhal](https://t.me/Krishna_Singhal) and \
-[UsergeTeam](https://t.me/TheUserge)
-Give a Star ⭐️ to [REPO](https://github.com/Krishna-Singhal/genStr) if you like this Bot.
+Developer: [@AbirHasan2005](http://t.me/linux_repo) \
+By [Discovery Projects](http://t.me/DIscovery_Updates)
+Must Join Channel for Updates !!
 """
     await msg.reply(out, disable_web_page_preview=True)
 
