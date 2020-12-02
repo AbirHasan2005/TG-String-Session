@@ -36,20 +36,16 @@ async def genStr(_, msg: Message):
     try:
         check_api = int(api.text)
     except Exception:
-        #await api.delete()
         await msg.reply("`API_ID` is Invalid.\nPress /start to Start again.")
         return
     api_id = api.text
-    #await api.delete()
     hash = await bot.ask(chat.id, HASH_TEXT)
     if await is_cancel(msg, hash.text):
         return
     if not len(hash.text) >= 30:
-        #await hash.delete()
         await msg.reply("`API_HASH` is Invalid.\nPress /start to Start again.")
         return
     api_hash = hash.text
-    #await hash.delete()
     while True:
         number = await bot.ask(chat.id, PHONE_NUMBER_TEXT)
         if not number.text:
@@ -57,12 +53,10 @@ async def genStr(_, msg: Message):
         if await is_cancel(msg, number.text):
             return
         phone = number.text
-        #await number.delete()
         confirm = await bot.ask(chat.id, f'`Is "{phone}" correct? (y/n):` \n\nSend: `y` (If Yes)\nSend: `n` (If No)')
         if await is_cancel(msg, confirm.text):
             return
         if "y" in confirm.text:
-            #await confirm.delete()
             break
     try:
         client = Client("my_account", api_id=api_id, api_hash=api_hash)
@@ -99,7 +93,6 @@ async def genStr(_, msg: Message):
     if await is_cancel(msg, otp.text):
         return
     otp_code = otp.text
-    #await otp.delete()
     try:
         await client.sign_in(phone, code.phone_code_hash, phone_code=' '.join(str(otp_code)))
     except PhoneCodeInvalid:
@@ -121,7 +114,6 @@ async def genStr(_, msg: Message):
         if await is_cancel(msg, two_step_code.text):
             return
         new_code = two_step_code.text
-        #await two_step_code.delete()
         try:
             await client.check_password(new_code)
         except Exception as e:
