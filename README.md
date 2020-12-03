@@ -1,5 +1,5 @@
 # TG-String-Session
-Generate String Session Using this bot.
+Generate Pyrogram String Session Using this bot.
 
 ## Demo Bot:
 <a href="https://t.me/StringSessionGen_Bot"><img src="https://img.shields.io/badge/Telegram-Bot-blue.svg?logo=telegram"></a>
